@@ -86,7 +86,7 @@ export default function Integrations() {
                   alt={item.alt}
                   title={item.title}
                   className={`h-[50px] w-auto object-contain transition-transform duration-300 hover:scale-110 ${
-                    item.invert ? 'brightness-0 invert' : ''
+                    item.invert ? 'dark-invert' : ''
                   }`}
                   draggable={false}
                 />
@@ -105,7 +105,14 @@ export default function Integrations() {
           className="text-center mt-12"
         >
           <p className="text-text-muted mb-3">Don't see your tool?</p>
-          <a href="#contact" className="text-nixo-light hover:text-nixo transition-colors font-medium">
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="text-nixo-light hover:text-nixo transition-colors font-medium"
+          >
             Request an integration →
           </a>
         </motion.div>

@@ -1,9 +1,35 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import Cal from '@calcom/embed-react';
 import nixoLogo from '../assets/logos/nixo-logo.png';
+import { useTheme } from './ThemeProvider';
+
+function useResolvedTheme() {
+  const { theme } = useTheme();
+  const [resolved, setResolved] = useState(() => {
+    if (theme !== 'system') return theme;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    if (theme !== 'system') {
+      setResolved(theme);
+      return;
+    }
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    setResolved(mql.matches ? 'dark' : 'light');
+    const handler = (e) => setResolved(e.matches ? 'dark' : 'light');
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, [theme]);
+
+  return resolved;
+}
 
 export default function Contact() {
+  const resolvedTheme = useResolvedTheme();
+
   return (
     <section id="contact" className="relative pt-16 pb-12 px-6 overflow-hidden">
       {/* Semi-transparent background */}
@@ -28,12 +54,13 @@ export default function Contact() {
         </h2>
 
         <p className="text-text-secondary max-w-md mx-auto text-center mb-6">
-          Book a 15-min call with Priya to see how Nixo can help your team.
+          Book a 15-min call with the team to see how Nixo can supercharge your forward deployed operations.
         </p>
 
         {/* Cal.com Inline Embed */}
         <div className="cal-embed-container mb-8">
           <Cal
+            key={resolvedTheme}
             calLink="priya-nixo/15min"
             style={{
               width: "100%",
@@ -42,7 +69,7 @@ export default function Contact() {
             }}
             config={{
               layout: "month_view",
-              theme: "dark",
+              theme: resolvedTheme,
             }}
           />
         </div>

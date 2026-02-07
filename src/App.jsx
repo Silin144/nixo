@@ -1,12 +1,34 @@
 import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import Integrations from './components/Integrations';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Plasma from './components/Plasma';
+import Home from './pages/Home';
+import FDEWiki from './pages/FDEWiki';
+import ForCandidates from './pages/ForCandidates';
+import PartnerProgram from './pages/PartnerProgram';
+import ForEmployers from './pages/ForEmployers';
+
+function ScrollHandler() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      // Wait for page to render, then scroll to the element
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+
+  return null;
+}
 
 export default function App() {
   useEffect(() => {
@@ -27,33 +49,36 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen text-text relative">
-      {/* Global Plasma Background */}
-      <div className="fixed inset-0 z-0">
-        <Plasma 
-          color="#C4287E"
-          speed={1}
-          direction="forward"
-          scale={1}
-          opacity={1}
-          mouseInteractive={true}
-        />
+    <BrowserRouter>
+      <ScrollHandler />
+      <div className="min-h-screen text-text relative">
+        {/* Global Plasma Background */}
+        <div className="fixed inset-0 z-0 plasma-wrap transition-all duration-500">
+          <Plasma 
+            color="#C4287E"
+            speed={1}
+            direction="forward"
+            scale={1}
+            opacity={1}
+            mouseInteractive={true}
+          />
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/fde-wiki" element={<FDEWiki />} />
+              <Route path="/for-candidates" element={<ForCandidates />} />
+              <Route path="/partner-program" element={<PartnerProgram />} />
+              <Route path="/for-employers" element={<ForEmployers />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </div>
-      
-      {/* Content */}
-      <div className="relative z-10">
-        <Header />
-        <main>
-          <Hero />
-          <div className="divider-glow" />
-          <Features />
-          <div className="divider" />
-          <Integrations />
-          <div className="divider-glow" />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </div>
+    </BrowserRouter>
   );
 }

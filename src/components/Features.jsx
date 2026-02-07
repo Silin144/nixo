@@ -34,9 +34,9 @@ export default function Features() {
             Features
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text mb-6 tracking-tight">
-            Everything to ship
+            One platform to
             <br />
-            <span className="gradient-text-nixo">faster than ever</span>
+            <span className="gradient-text-nixo">run your FDE ops</span>
           </h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             Nixo brings together customer context, code intelligence, and workload visibility 
@@ -286,7 +286,7 @@ function PreventDuplicateVisual() {
         {/* Linear Ticket */}
         <div className="p-4 border-b border-border">
           <div className="flex items-start gap-3">
-            <img src={linearLogo} alt="Linear" className="w-5 h-5 object-contain brightness-0 invert flex-shrink-0 mt-0.5" />
+            <img src={linearLogo} alt="Linear" className="w-5 h-5 object-contain dark-invert flex-shrink-0 mt-0.5" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs font-mono text-text-muted">NIX-45</span>
@@ -306,7 +306,7 @@ function PreventDuplicateVisual() {
         {/* GitHub PR */}
         <div className="p-4">
           <div className="flex items-start gap-3">
-            <img src={githubLogo} alt="GitHub" className="w-5 h-5 object-contain brightness-0 invert flex-shrink-0 mt-0.5" />
+            <img src={githubLogo} alt="GitHub" className="w-5 h-5 object-contain dark-invert flex-shrink-0 mt-0.5" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <GitPullRequest className="w-3.5 h-3.5 text-emerald" />

@@ -1,71 +1,18 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import nixoLogo from '../assets/logos/nixo-logo.png';
-import ycLogo from '../assets/logos/yc-logo.png';
+
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-    }
-  };
-
   return (
     <footer className="relative border-t border-border bg-void/80 backdrop-blur-sm">
       
       <div className="relative max-w-6xl mx-auto px-6 py-16">
-        {/* Waitlist Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-12 mb-12 border-b border-border">
-          <div>
-            <h3 className="text-xl font-semibold text-text mb-2">Join the waitlist</h3>
-            <p className="text-text-muted">Get early access when we launch</p>
-          </div>
-          
-          {submitted ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-3 bg-nixo text-white px-6 py-3 rounded-full font-medium"
-            >
-              <Check className="w-4 h-4" />
-              You're on the list!
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-faded" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your work email"
-                  className="w-full md:w-72 pl-11 pr-4 py-3 rounded-full bg-surface border border-border text-text placeholder-text-faded text-[15px] transition-all"
-                  required
-                />
-              </div>
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="btn-primary"
-              >
-                Get Access
-                <ArrowRight className="w-4 h-4" />
-              </motion.button>
-            </form>
-          )}
-        </div>
-
         {/* Main Footer Content */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-10">
           {/* Logo & Copyright */}
           <div className="flex flex-col items-center md:items-start gap-4">
-            <a href="#" className="flex items-center gap-3 group">
+            <Link to="/" className="flex items-center gap-3 group">
               <motion.img 
                 src={nixoLogo} 
                 alt="Nixo" 
@@ -74,37 +21,24 @@ export default function Footer() {
                 transition={{ duration: 0.5 }}
               />
               <span className="text-lg font-semibold text-text tracking-tight">Nixo</span>
-            </a>
+            </Link>
             <p className="text-sm text-text-faded">
               © {new Date().getFullYear()} Nixo Inc. All rights reserved.
             </p>
-            <div className="flex items-center gap-2">
-              <img src={ycLogo} alt="Y Combinator" className="h-4" />
-              <span className="text-xs text-text-muted">S25 Batch</span>
-            </div>
           </div>
 
           {/* Links */}
           <nav className="flex items-center gap-8">
-            {[
-              { href: '#features', label: 'Features' },
-              { href: '#integrations', label: 'Integrations' },
-              { href: '#contact', label: 'Contact' },
-            ].map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-text-muted hover:text-text transition-colors text-sm font-medium"
-              >
-                {link.label}
-              </a>
-            ))}
+            <a href="/#features" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Features</a>
+            <a href="/#integrations" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Integrations</a>
+            <Link to="/fde-wiki" className="text-text-muted hover:text-text transition-colors text-sm font-medium">The FDE Wiki</Link>
+            <a href="/#contact" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Contact</a>
           </nav>
 
           {/* Social Links */}
           <div className="flex items-center gap-3">
             <a
-              href="https://twitter.com/withnixo"
+              href="https://x.com/withnixo"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full border border-border hover:border-nixo/50 hover:bg-nixo/10 flex items-center justify-center transition-all group"
@@ -114,7 +48,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/company/withnixo/posts/?feedView=all"
+              href="https://www.linkedin.com/company/withnixo"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full border border-border hover:border-nixo/50 hover:bg-nixo/10 flex items-center justify-center transition-all group"

@@ -411,3 +411,82 @@ input:focus {
   background: var(--color-nixo);
   color: white;
 }
+
+/* ================================
+   LIGHT MODE OVERRIDES
+   ================================ */
+
+html.light {
+  --color-void: #FFFFFF;
+  --color-surface: #F4F4F5;
+  --color-surface-elevated: #E4E4E7;
+  --color-surface-hover: #D4D4D8;
+
+  --color-text: #09090B;
+  --color-text-secondary: #52525B;
+  --color-text-muted: #71717A;
+  --color-text-faded: #A1A1AA;
+
+  /* Pink stays pink */
+  --color-nixo: #C4287E;
+  --color-nixo-light: #E04D9D;
+  --color-nixo-glow: rgba(196, 40, 126, 0.25);
+
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.15);
+  --color-border-glow: rgba(196, 40, 126, 0.3);
+}
+
+html.light .card-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+html.light .badge {
+  background: var(--color-surface);
+}
+
+html.light .badge-yc {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+html.light .badge-nixo {
+  background: rgba(196, 40, 126, 0.08);
+}
+
+html.light .divider {
+  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
+}
+
+html.light .divider-glow {
+  background: linear-gradient(90deg, transparent, var(--color-nixo), transparent);
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: var(--color-text-faded);
+}
+
+html.light ::selection {
+  background: var(--color-nixo);
+  color: white;
+}
+
+/* Logos that should be inverted in dark mode only */
+.dark-invert {
+  filter: brightness(0) invert(1);
+}
+
+html.light .dark-invert {
+  filter: none;
+}
+
+/* Soften plasma in light mode */
+html.light .plasma-wrap {
+  opacity: 0.18;
+  filter: blur(40px) saturate(1.8);
+  mix-blend-mode: multiply;
+}
