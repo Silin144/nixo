@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, ChevronDown, ChevronRight, ArrowRight, Sparkles, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const wikiData = [
   {
@@ -115,6 +116,7 @@ The key principle: if the customer needs FDE work to succeed, include it in the 
 ];
 
 export default function FDEWiki() {
+  const navigate = useNavigate();
   const [openItems, setOpenItems] = useState(new Set(['What is an FDE?']));
   const [activeCategory, setActiveCategory] = useState('Defining the Role');
   const [searchQuery, setSearchQuery] = useState('');
@@ -233,7 +235,8 @@ export default function FDEWiki() {
                     Manage it with Nixo.
                   </p>
                   <a
-                    href="/#contact"
+                    href="#contact"
+                    onClick={(e) => { e.preventDefault(); navigate('/#contact'); }}
                     className="inline-flex items-center gap-2 text-xs font-medium text-nixo hover:text-nixo-light transition-colors"
                   >
                     Learn More <ArrowRight className="w-3 h-3" />

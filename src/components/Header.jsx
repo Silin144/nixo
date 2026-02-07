@@ -98,19 +98,13 @@ function HashLink({ href, className, children, onClick }) {
 
   const handleClick = (e) => {
     onClick?.();
-    // If it's like "/#contact" and we're not on "/", navigate via router
-    if (href.startsWith('/#')) {
+    if (href.startsWith('#')) {
       e.preventDefault();
-      const hash = href.slice(1); // "/#contact" → "#contact"
       if (location.pathname === '/') {
-        // Already on home, just scroll
-        document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
       } else {
-        navigate('/' + hash);
+        navigate('/' + href);
       }
-    } else if (href.startsWith('#')) {
-      e.preventDefault();
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -137,7 +131,7 @@ export default function Header() {
   const [hiringOpen, setHiringOpen] = useState(false);
 
   const navLinks = [
-    { href: isHome ? '#features' : '/#features', label: 'Features' },
+    { href: '#features', label: 'Features' },
     {
       label: 'Hiring Hub',
       isDropdown: true,
@@ -148,7 +142,7 @@ export default function Header() {
       ],
     },
     { href: '/fde-wiki', label: 'FDE Wiki', isRoute: true },
-    { href: isHome ? '#contact' : '/#contact', label: 'Contact' },
+    { href: '#contact', label: 'Contact' },
   ];
 
   return (
@@ -267,7 +261,7 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
             <HashLink
-              href={isHome ? '#contact' : '/#contact'}
+              href="#contact"
               className="inline-flex items-center gap-2 bg-nixo hover:bg-nixo-light text-white px-5 py-2 rounded-xl text-sm font-medium transition-colors hover:scale-[1.02] active:scale-[0.98]"
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -345,7 +339,7 @@ export default function Header() {
                 })}
                 <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }}>
                   <HashLink
-                    href={isHome ? '#contact' : '/#contact'}
+                    href="#contact"
                     onClick={() => setIsOpen(false)}
                     className="inline-flex items-center justify-center gap-2 bg-nixo hover:bg-nixo-light text-white px-5 py-3 rounded-xl text-sm font-medium transition-colors mt-2 w-full"
                   >

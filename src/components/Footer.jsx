@@ -1,6 +1,26 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import nixoLogo from '../assets/logos/nixo-logo.png';
+
+function FooterHashLink({ hash, children, className }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/' + hash);
+    }
+  };
+
+  return (
+    <a href={hash} onClick={handleClick} className={className}>
+      {children}
+    </a>
+  );
+}
 
 
 export default function Footer() {
@@ -29,10 +49,10 @@ export default function Footer() {
 
           {/* Links */}
           <nav className="flex items-center gap-8">
-            <a href="/#features" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Features</a>
-            <a href="/#integrations" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Integrations</a>
+            <FooterHashLink hash="#features" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Features</FooterHashLink>
+            <FooterHashLink hash="#integrations" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Integrations</FooterHashLink>
             <Link to="/fde-wiki" className="text-text-muted hover:text-text transition-colors text-sm font-medium">The FDE Wiki</Link>
-            <a href="/#contact" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Contact</a>
+            <FooterHashLink hash="#contact" className="text-text-muted hover:text-text transition-colors text-sm font-medium">Contact</FooterHashLink>
           </nav>
 
           {/* Social Links */}
