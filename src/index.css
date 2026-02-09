@@ -418,9 +418,9 @@ input:focus {
 
 html.light {
   --color-void: #FFFFFF;
-  --color-surface: #F4F4F5;
-  --color-surface-elevated: #E4E4E7;
-  --color-surface-hover: #D4D4D8;
+  --color-surface: #FDF2F8;
+  --color-surface-elevated: #F3E8EF;
+  --color-surface-hover: #EDE0E8;
 
   --color-text: #09090B;
   --color-text-secondary: #52525B;
@@ -432,8 +432,8 @@ html.light {
   --color-nixo-light: #E04D9D;
   --color-nixo-glow: rgba(196, 40, 126, 0.25);
 
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-border-strong: rgba(0, 0, 0, 0.15);
+  --color-border: rgba(196, 40, 126, 0.08);
+  --color-border-strong: rgba(196, 40, 126, 0.15);
   --color-border-glow: rgba(196, 40, 126, 0.3);
 }
 

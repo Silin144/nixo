@@ -23,7 +23,7 @@ const avatars = {
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="relative z-10 mx-auto px-4 md:px-8 pt-32 pb-20">
+      <div className="relative z-10 mx-auto px-4 md:px-6 lg:px-10 pt-32 pb-20 max-w-[1400px]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -109,10 +109,10 @@ export default function Hero() {
               </div>
 
               {/* Dashboard */}
-              <div className="bg-void/90 rounded-b-xl flex overflow-hidden text-left" style={{ minHeight: 420 }}>
+              <div className="bg-void/90 rounded-b-xl flex text-left" style={{ minHeight: 460 }}>
 
                 {/* Left Sidebar */}
-                <div className="hidden md:flex flex-col w-48 flex-shrink-0 border-r border-border bg-surface/40 py-4 px-3">
+                <div className="hidden lg:flex flex-col w-56 flex-shrink-0 bg-surface/40 py-5 px-4">
                   {/* Brand */}
                   <div className="flex items-center gap-2 px-2 mb-5">
                     <img src={nixoLogo} alt="Nixo" className="w-5 h-5 object-contain" />
@@ -159,27 +159,32 @@ export default function Hero() {
                   </div>
                 </div>
 
+                {/* Divider */}
+                <div className="hidden lg:flex flex-shrink-0 items-stretch px-5">
+                  <div className="w-[1px] bg-border my-4" />
+                </div>
+
                 {/* Main Content */}
                 <div className="flex-1 min-w-0 flex flex-col">
                   {/* Welcome bar */}
-                  <div className="flex items-center justify-between px-5 pt-5 pb-3">
+                  <div className="flex items-center justify-between px-6 pt-6 pb-4">
                     <h2 className="text-lg md:text-xl font-display font-bold text-nixo">
                       Welcome to Nixo, Stephanie
                     </h2>
-                    <div className="hidden sm:flex items-center gap-1 bg-surface rounded-lg p-0.5">
+                    <div className="hidden sm:flex items-center gap-1 bg-surface rounded-lg p-0.5 mr-0">
                       <button className="px-3 py-1.5 text-[11px] font-medium bg-nixo/15 text-nixo rounded-md">Digest</button>
                       <button className="px-3 py-1.5 text-[11px] font-medium text-text-muted rounded-md">Actions</button>
                     </div>
                   </div>
 
                   {/* Fires */}
-                  <div className="flex-1 px-5 pb-4 overflow-hidden">
-                    <div className="flex items-center gap-2 mb-3">
+                  <div className="flex-1 px-6 pb-5 overflow-hidden">
+                    <div className="flex items-center gap-2 mb-4">
                       <Flame className="w-4 h-4 text-red-500" />
                       <span className="text-sm font-semibold text-text">Fires</span>
                     </div>
 
-                    <div className="space-y-0 divide-y divide-border">
+                    <div className="divide-y divide-border">
                       <FireItem
                         company="Retool"
                         title="SSO login failing for team members"
@@ -243,8 +248,13 @@ export default function Hero() {
                   </div>
                 </div>
 
+                {/* Divider */}
+                <div className="hidden xl:flex flex-shrink-0 items-stretch px-10">
+                  <div className="w-[1px] bg-border my-4" />
+                </div>
+
                 {/* Right Sidebar */}
-                <div className="hidden lg:flex flex-col w-52 flex-shrink-0 border-l border-border bg-surface/30 py-5 px-4">
+                <div className="hidden xl:flex flex-col w-60 flex-shrink-0 bg-surface/30 py-5 px-5">
                   {/* Team Workload */}
                   <div className="mb-5">
                     <div className="flex items-center gap-1.5 mb-3">
@@ -283,18 +293,6 @@ export default function Hero() {
             <div className="absolute -inset-4 -z-10 bg-nixo/10 blur-3xl rounded-full" />
           </motion.div>
 
-          {/* Quote */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="mt-16 pt-8 border-t border-border text-center"
-          >
-            <p className="text-xl md:text-2xl lg:text-3xl font-display font-medium italic text-text-secondary tracking-tight">
-              "Make forward deployed engineering{' '}
-              <span className="gradient-text-nixo not-italic font-bold">your superpower</span>"
-            </p>
-          </motion.div>
         </motion.div>
       </div>
 
@@ -340,11 +338,11 @@ function FireItem({ company, title, person, avatar, time, tag, tagColor, note, n
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.4 }}
-      className="py-3"
+      className="py-3.5"
     >
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1.5">
             <span className="text-xs font-semibold text-text">{company}:</span>
             <span className="text-xs text-text-secondary truncate">{title}</span>
           </div>
