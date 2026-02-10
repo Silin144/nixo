@@ -83,9 +83,10 @@ export default function Hero() {
 
           {/* Hero Visual - Nixo Digest Dashboard */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            initial={{ opacity: 0, y: 60, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ margin: '-100px' }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-full mx-auto"
           >
             <div className="card-glass p-1.5 rounded-2xl">
@@ -95,94 +96,76 @@ export default function Hero() {
                 {/* Main Content */}
                 <div className="flex-1 min-w-0 flex flex-col">
                   {/* Welcome bar */}
-                  <div className="flex items-center justify-between px-6 pt-6 pb-4">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ margin: '-50px' }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="flex items-center justify-between px-6 pt-6 pb-4"
+                  >
                     <h2 className="text-lg md:text-xl font-display font-bold text-nixo">
                       Welcome to Nixo, Stephanie
                     </h2>
-                    <div className="hidden sm:flex items-center gap-1 bg-surface rounded-lg p-0.5 mr-0">
+                    <div className="hidden sm:flex items-center gap-1 bg-surface rounded-lg p-0.5">
                       <button className="px-3 py-1.5 text-[11px] font-medium bg-nixo/15 text-nixo rounded-md">Digest</button>
                       <button className="px-3 py-1.5 text-[11px] font-medium text-text-muted rounded-md">Actions</button>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Fires */}
                   <div className="flex-1 px-6 pb-5 overflow-hidden">
-                    <div className="flex items-center gap-2 mb-4">
-                      <Flame className="w-4 h-4 text-red-500" />
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ margin: '-50px' }}
+                      transition={{ delay: 0.4 }}
+                      className="flex items-center gap-2 mb-4"
+                    >
+                      <motion.div
+                        animate={{ scale: [1, 1.3, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                      >
+                        <Flame className="w-4 h-4 text-red-500" />
+                      </motion.div>
                       <span className="text-sm font-semibold text-text">Fires</span>
-                    </div>
+                      <motion.span
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 4 }}
+                        className="text-[9px] text-red-400 ml-1"
+                      >
+                        ● Live
+                      </motion.span>
+                    </motion.div>
 
                     <div className="divide-y divide-border">
-                      <FireItem
-                        company="Retool"
-                        title="SSO login failing for team members"
-                        person="Sarah Chen"
-                        avatar={avatars.sarah}
-                        time="Just now"
-                        tag="Support"
-                        tagColor="red"
-                        note="Mike Adams · Fixed 3 SSO issues this month"
-                        noteAvatar={avatars.mike}
-                        delay={0.5}
-                      />
-                      <FireItem
-                        company="TechStart Inc"
-                        title="Webhook delivery delays"
-                        person="Marcus Johnson"
-                        avatar={avatars.marcus}
-                        time="2h ago"
-                        tag="Support"
-                        tagColor="red"
-                        note="Lisa Park · Owns webhook infrastructure"
-                        noteAvatar={avatars.lisa}
-                        delay={0.6}
-                      />
-                      <FireItem
-                        company="Vercel"
-                        title="Custom Salesforce integration"
-                        person="Robert Chen"
-                        avatar={avatars.robert}
-                        time="3h ago"
-                        tag="Build"
-                        tagColor="blue"
-                        note="You · Built Salesforce sync for Linear"
-                        delay={0.7}
-                      />
-                      <FireItem
-                        company="DataFlow"
-                        title="API returning 500 errors intermittently"
-                        person="David Park"
-                        avatar={avatars.david}
-                        time="5 days ago"
-                        tag="Support"
-                        tagColor="red"
-                        note="Mike Adams · Already responded to this thread"
-                        noteAvatar={avatars.mike}
-                        delay={0.8}
-                      />
-                      <FireItem
-                        company="Linear"
-                        title="Weekly usage reports to Notion"
-                        person="Jordan Smith"
-                        avatar={avatars.jordan}
-                        time="7 days ago"
-                        tag="Build"
-                        tagColor="blue"
-                        note="Alex Kim · Built Notion integration for Stripe"
-                        noteAvatar={avatars.alex}
-                        delay={0.9}
-                      />
+                      <FireItem company="Retool" title="SSO login failing for team members" person="Sarah Chen" avatar={avatars.sarah} time="Just now" tag="Support" tagColor="red" note="Mike Adams · Fixed 3 SSO issues this month" noteAvatar={avatars.mike} delay={0.5} />
+                      <FireItem company="TechStart Inc" title="Webhook delivery delays" person="Marcus Johnson" avatar={avatars.marcus} time="2h ago" tag="Support" tagColor="red" note="Lisa Park · Owns webhook infrastructure" noteAvatar={avatars.lisa} delay={0.6} />
+                      <FireItem company="Vercel" title="Custom Salesforce integration" person="Robert Chen" avatar={avatars.robert} time="3h ago" tag="Build" tagColor="blue" note="You · Built Salesforce sync for Linear" delay={0.7} />
+                      <FireItem company="DataFlow" title="API returning 500 errors intermittently" person="David Park" avatar={avatars.david} time="5 days ago" tag="Support" tagColor="red" note="Mike Adams · Already responded to this thread" noteAvatar={avatars.mike} delay={0.8} />
+                      <FireItem company="Linear" title="Weekly usage reports to Notion" person="Jordan Smith" avatar={avatars.jordan} time="7 days ago" tag="Build" tagColor="blue" note="Alex Kim · Built Notion integration for Stripe" noteAvatar={avatars.alex} delay={0.9} />
                     </div>
                   </div>
                 </div>
 
                 {/* Divider */}
-                <div className="hidden xl:flex flex-shrink-0 items-stretch px-10try to">
+                <motion.div
+                  initial={{ opacity: 0, scaleY: 0 }}
+                  whileInView={{ opacity: 1, scaleY: 1 }}
+                  viewport={{ margin: '-50px' }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="hidden xl:flex flex-shrink-0 items-stretch px-5 origin-top"
+                >
                   <div className="w-[1px] bg-border my-4" />
-                </div>
+                </motion.div>
 
                 {/* Right Sidebar */}
-                <div className="hidden xl:flex flex-col w-60 flex-shrink-0 bg-surface/30 py-5 px-5">
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ margin: '-50px' }}
+                  transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="hidden xl:flex flex-col w-60 flex-shrink-0 bg-surface/30 py-5 px-5"
+                >
                   {/* Team Workload */}
                   <div className="mb-5">
                     <div className="flex items-center gap-1.5 mb-3">
@@ -191,34 +174,49 @@ export default function Hero() {
                     </div>
                     <div className="flex items-center justify-between mb-3 px-1">
                       <span className="text-[10px] text-text-muted">Unassigned requests</span>
-                      <span className="text-[10px] font-semibold bg-nixo/15 text-nixo px-2 py-0.5 rounded-full">2</span>
+                      <motion.span
+                        animate={{ scale: [1, 1.15, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 5 }}
+                        className="text-[10px] font-semibold bg-nixo/15 text-nixo px-2 py-0.5 rounded-full"
+                      >
+                        2
+                      </motion.span>
                     </div>
                     <div className="space-y-2.5">
-                      <WorkloadBar name="Mike Adams" avatar={avatars.mike} count={8} pct={85} color="nixo" />
-                      <WorkloadBar name="Sarah Wilson" avatar={avatars.sarahW} count={4} pct={45} color="emerald" />
-                      <WorkloadBar name="Lisa Park" avatar={avatars.lisa} count={6} pct={65} color="amber" />
-                      <WorkloadBar name="David Park" avatar={avatars.david} count={5} pct={55} color="electric" />
+                      <WorkloadBar name="Mike Adams" avatar={avatars.mike} count={8} pct={85} color="nixo" delay={0.8} />
+                      <WorkloadBar name="Sarah Wilson" avatar={avatars.sarahW} count={4} pct={45} color="emerald" delay={0.9} />
+                      <WorkloadBar name="Lisa Park" avatar={avatars.lisa} count={6} pct={65} color="amber" delay={1.0} />
+                      <WorkloadBar name="David Park" avatar={avatars.david} count={5} pct={55} color="electric" delay={1.1} />
                     </div>
                   </div>
 
                   {/* Critical Accounts */}
                   <div>
                     <div className="flex items-center gap-1.5 mb-3">
-                      <AlertTriangle className="w-3.5 h-3.5 text-red-500" />
+                      <motion.div
+                        animate={{ rotate: [0, -10, 10, -10, 0] }}
+                        transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 4 }}
+                      >
+                        <AlertTriangle className="w-3.5 h-3.5 text-red-500" />
+                      </motion.div>
                       <span className="text-xs font-semibold text-text">Critical Accounts</span>
                     </div>
                     <div className="space-y-2">
-                      <CriticalAccount name="Retool" detail="SSO blocking eng team" badge="3 open" badgeColor="red" />
-                      <CriticalAccount name="DataFlow" detail="API 500 errors" badge="5d alert" badgeColor="amber" />
-                      <CriticalAccount name="Linear" detail="Awaiting timeline" />
+                      <CriticalAccount name="Retool" detail="SSO blocking eng team" badge="3 open" badgeColor="red" delay={1.1} />
+                      <CriticalAccount name="DataFlow" detail="API 500 errors" badge="5d alert" badgeColor="amber" delay={1.2} />
+                      <CriticalAccount name="Linear" detail="Awaiting timeline" delay={1.3} />
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
 
             {/* Glow effect under card */}
-            <div className="absolute -inset-4 -z-10 bg-nixo/10 blur-3xl rounded-full" />
+            <motion.div
+              animate={{ opacity: [0.08, 0.15, 0.08] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -inset-4 -z-10 bg-nixo/10 blur-3xl rounded-full"
+            />
           </motion.div>
 
         </motion.div>
@@ -254,9 +252,10 @@ function FireItem({ company, title, person, avatar, time, tag, tagColor, note, n
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.4 }}
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ margin: '-30px' }}
+      transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="py-3.5"
     >
       <div className="flex items-start justify-between gap-4">
@@ -271,22 +270,34 @@ function FireItem({ company, title, person, avatar, time, tag, tagColor, note, n
             <span className="text-[10px] text-text-faded">· {time}</span>
           </div>
         </div>
-        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full flex-shrink-0 ${tagClasses[tagColor]}`}>
+        <motion.span
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ margin: '-30px' }}
+          transition={{ delay: delay + 0.15, duration: 0.3, type: 'spring', stiffness: 300 }}
+          className={`text-[10px] font-medium px-2 py-0.5 rounded-full flex-shrink-0 ${tagClasses[tagColor]}`}
+        >
           {tag}
-        </span>
+        </motion.span>
       </div>
       {note && (
-        <div className="flex items-center gap-2 mt-2 ml-0.5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ margin: '-30px' }}
+          transition={{ delay: delay + 0.25, duration: 0.4 }}
+          className="flex items-center gap-2 mt-2 ml-0.5"
+        >
           {noteAvatar && <img src={noteAvatar} alt="" className="w-3.5 h-3.5 rounded-full bg-surface" />}
           {!noteAvatar && <div className="w-3.5 h-3.5 rounded-full bg-nixo/20 flex items-center justify-center"><span className="text-[7px] text-nixo font-bold">Y</span></div>}
           <span className="text-[10px] text-text-muted italic">{note}</span>
-        </div>
+        </motion.div>
       )}
     </motion.div>
   );
 }
 
-function WorkloadBar({ name, avatar, count, pct, color }) {
+function WorkloadBar({ name, avatar, count, pct, color, delay = 0.6 }) {
   const barColors = {
     nixo: 'bg-nixo',
     emerald: 'bg-emerald',
@@ -295,7 +306,12 @@ function WorkloadBar({ name, avatar, count, pct, color }) {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ margin: '-30px' }}
+      transition={{ delay, duration: 0.4 }}
+    >
       <div className="flex items-center gap-2 mb-1">
         <img src={avatar} alt={name} className="w-4 h-4 rounded-full bg-surface" />
         <span className="text-[10px] text-text flex-1 truncate">{name}</span>
@@ -304,32 +320,43 @@ function WorkloadBar({ name, avatar, count, pct, color }) {
       <div className="h-1.5 bg-surface-elevated rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${pct}%` }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          whileInView={{ width: `${pct}%` }}
+          viewport={{ margin: '-30px' }}
+          transition={{ duration: 1, delay: delay + 0.2, ease: [0.16, 1, 0.3, 1] }}
           className={`h-full rounded-full ${barColors[color]}`}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-function CriticalAccount({ name, detail, badge, badgeColor }) {
+function CriticalAccount({ name, detail, badge, badgeColor, delay = 0 }) {
   const badgeClasses = {
     red: 'bg-red-500/15 text-red-400',
     amber: 'bg-amber/15 text-amber',
   };
 
   return (
-    <div className="bg-surface/60 rounded-lg px-3 py-2">
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ margin: '-30px' }}
+      transition={{ delay, duration: 0.4 }}
+      className="bg-surface/60 rounded-lg px-3 py-2"
+    >
       <div className="flex items-center justify-between mb-0.5">
         <span className="text-[11px] font-semibold text-text">{name}</span>
         {badge && (
-          <span className={`text-[9px] font-medium px-1.5 py-0.5 rounded-full ${badgeClasses[badgeColor]}`}>
+          <motion.span
+            animate={{ opacity: [1, 0.6, 1] }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+            className={`text-[9px] font-medium px-1.5 py-0.5 rounded-full ${badgeClasses[badgeColor]}`}
+          >
             {badge}
-          </span>
+          </motion.span>
         )}
       </div>
       <span className="text-[10px] text-text-muted">{detail}</span>
-    </div>
+    </motion.div>
   );
 }
