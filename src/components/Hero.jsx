@@ -219,19 +219,6 @@ export default function Hero() {
             />
           </motion.div>
 
-          {/* Quote */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ margin: '-50px' }}
-            transition={{ duration: 0.6 }}
-            className="mt-16 pt-8 border-t border-border text-center"
-          >
-            <p className="text-xl md:text-2xl lg:text-3xl font-display font-medium italic text-text-secondary tracking-tight">
-              "Make forward deployed engineering{' '}
-              <span className="gradient-text-nixo not-italic font-bold">your superpower</span>"
-            </p>
-          </motion.div>
         </motion.div>
       </div>
 

@@ -36,9 +36,9 @@ const features = [
   {
     id: 'intake',
     icon: <Bot className="w-5 h-5" />,
-    label: 'AI Intake Agent',
-    title: 'AI-powered customer intake',
-    description: "Nixo's AI Intake Agent engages customers to collect the context FDEs need before stepping in. Save hours of back-and-forth.",
+    label: 'AI Context Engine',
+    title: 'Instant AI-powered context summaries',
+    description: "Nixo's AI reads every message, ticket, and thread — then generates a structured brief so your FDE walks in prepared, not blind.",
     color: 'electric',
     Visual: FeatureIntake,
   },
@@ -339,11 +339,11 @@ function FeatureAttention({ isInView }) {
 }
 
 function FeatureIntake({ isInView }) {
-  const messages = [
-    { type: 'user', name: 'Richard Hendricks', msg: "We don't think the ETL pipeline is working for us", time: '12:15 AM' },
-    { type: 'bot', name: 'Nixo AI', msg: 'Thanks for flagging this! Can you tell me which data sources you\'re trying to sync?', time: '12:15 AM' },
-    { type: 'user', name: 'Richard Hendricks', msg: 'We want to pull from Datadog and push to our analytics dashboard', time: '12:17 AM' },
-    { type: 'bot', name: 'Nixo AI', msg: "Got it! I've gathered the context. Assigning to Sarah who has expertise in Datadog integrations.", time: '12:17 AM' },
+  const summaryFields = [
+    { label: 'Issue Type', value: 'Integration Bug', color: 'text-red-400' },
+    { label: 'Severity', value: 'High — blocking deployment', color: 'text-amber' },
+    { label: 'Tech Stack', value: 'Datadog, AWS, PostgreSQL', color: 'text-text' },
+    { label: 'Suggested Assignee', value: 'Sarah Chen — 3 similar fixes', color: 'text-emerald' },
   ];
 
   return (
@@ -354,49 +354,54 @@ function FeatureIntake({ isInView }) {
     >
       <div className="card-glass p-1.5 rounded-2xl border border-border">
         <div className="bg-void/95 rounded-xl overflow-hidden">
-          {/* Chat header */}
-          <div className="p-4 border-b border-border flex items-center gap-3">
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-2.5 h-2.5 rounded-full bg-emerald"
-            />
-            <span className="text-sm font-medium text-text">Nixo Intake Agent</span>
-            <span className="text-xs text-text-muted ml-auto bg-surface px-2 py-0.5 rounded-full">Online</span>
+          {/* Raw message */}
+          <div className="p-4 border-b border-border">
+            <div className="flex items-center gap-2 mb-2">
+              <img src={avatars.richard} alt="" className="w-6 h-6 rounded-full bg-surface" />
+              <span className="text-xs font-medium text-text">Richard Hendricks</span>
+              <span className="text-[10px] text-text-faded">via Slack · 2m ago</span>
+            </div>
+            <p className="text-sm text-text-secondary leading-relaxed">
+              "We don't think the ETL pipeline is working — Datadog metrics aren't showing up in the dashboard and our deploy is blocked."
+            </p>
           </div>
 
-          {/* Messages */}
-          <div className="p-5 space-y-5">
-            {messages.map((m, i) => (
+          {/* AI processing indicator */}
+          <motion.div
+            animate={isInView ? { opacity: [0.5, 1, 0.5] } : {}}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="px-4 py-2.5 border-b border-border bg-electric/5 flex items-center gap-2"
+          >
+            <Bot className="w-3.5 h-3.5 text-electric" />
+            <span className="text-[11px] text-electric font-medium">Nixo AI analyzed 23 Slack threads + 4 Linear tickets</span>
+          </motion.div>
+
+          {/* Structured summary */}
+          <div className="p-4 space-y-3">
+            <div className="text-[10px] text-text-faded uppercase tracking-wider font-semibold mb-2">Auto-generated Brief</div>
+            {summaryFields.map((field, i) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 15, x: m.type === 'user' ? 15 : -15 }}
-                animate={isInView ? { opacity: 1, y: 0, x: 0 } : {}}
-                transition={{ delay: 0.4 + i * 0.2, type: 'spring', stiffness: 80 }}
-                className={`flex gap-3 ${m.type === 'bot' ? '' : 'flex-row-reverse'}`}
+                key={field.label}
+                initial={{ opacity: 0, x: -15 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.5 + i * 0.12, duration: 0.4 }}
+                className="flex items-start gap-3"
               >
-                <img
-                  src={m.type === 'bot' ? avatars.nixo : avatars.richard}
-                  alt=""
-                  className="w-8 h-8 rounded-full bg-surface flex-shrink-0"
-                />
-                <div className={`flex-1 ${m.type === 'bot' ? '' : 'text-right'}`}>
-                  <div className={`flex items-center gap-2 mb-1.5 ${m.type === 'bot' ? '' : 'justify-end'}`}>
-                    <span className={`text-sm font-medium ${m.type === 'bot' ? 'text-electric' : 'text-text'}`}>
-                      {m.name}
-                    </span>
-                    <span className="text-[10px] text-text-faded">{m.time}</span>
-                  </div>
-                  <div className={`inline-block rounded-2xl px-4 py-2.5 text-sm text-text-secondary ${
-                    m.type === 'bot'
-                      ? 'bg-electric/10 border border-electric/20 rounded-tl-sm'
-                      : 'bg-surface rounded-tr-sm'
-                  }`}>
-                    {m.msg}
-                  </div>
-                </div>
+                <span className="text-[10px] text-text-muted w-28 flex-shrink-0 pt-0.5">{field.label}</span>
+                <span className={`text-sm font-medium ${field.color}`}>{field.value}</span>
               </motion.div>
             ))}
+
+            {/* Action buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.0 }}
+              className="flex gap-2 pt-3 border-t border-border mt-3"
+            >
+              <span className="text-[10px] px-3 py-1.5 rounded-full bg-nixo/15 text-nixo font-medium cursor-default">Assign to Sarah</span>
+              <span className="text-[10px] px-3 py-1.5 rounded-full bg-surface text-text-muted font-medium cursor-default">View full context</span>
+            </motion.div>
           </div>
         </div>
       </div>
