@@ -520,10 +520,10 @@ html.light ::selection {
   color: white;
 }
 
-/* Make section overlays invisible in light mode so everything blends to white */
+/* Light mode sections: frosted white so plasma peeks through */
 html.light .backdrop-blur-sm {
-  background: transparent !important;
-  backdrop-filter: none !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(20px) !important;
 }
 
 /* Input styling for light mode */
@@ -557,10 +557,10 @@ html.light .dark-invert {
   filter: none;
 }
 
-/* Soft rose plasma for light mode */
+/* Plasma in light mode: soft watercolor washes */
 html.light .plasma-wrap {
-  opacity: 0.7;
-  filter: saturate(1.1) brightness(1.05);
+  opacity: 0.65;
+  filter: blur(15px) saturate(2) brightness(1.15);
   mix-blend-mode: multiply;
 }
 
