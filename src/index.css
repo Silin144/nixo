@@ -461,9 +461,10 @@ html.light .badge {
 }
 
 html.light .badge-yc {
-  background: rgba(245, 158, 11, 0.1);
-  border-color: rgba(245, 158, 11, 0.2);
-  color: #D97706;
+  background: #FFF7ED;
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #B45309;
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.1);
 }
 
 html.light .badge-nixo {
