@@ -520,6 +520,12 @@ html.light ::selection {
   color: white;
 }
 
+/* Make section overlays invisible in light mode so everything blends to white */
+html.light .backdrop-blur-sm {
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+
 /* Input styling for light mode */
 html.light input {
   background: rgba(255, 255, 255, 0.7);
