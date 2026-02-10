@@ -417,11 +417,11 @@ input:focus {
    ================================ */
 
 html.light {
-  /* Clean light palette with pink tint */
-  --color-void: #FAF7F8;
-  --color-surface: #F5F0F2;
-  --color-surface-elevated: #EDE7EA;
-  --color-surface-hover: #E5DFE2;
+  /* Clean light palette — void and surface nearly identical so sections blend */
+  --color-void: #FFFFFF;
+  --color-surface: #FAFAFA;
+  --color-surface-elevated: #F0F0F0;
+  --color-surface-hover: #E8E8E8;
 
   /* Neutral dark text */
   --color-text: #1A1A1A;
