@@ -1,12 +1,6 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Zap, Flame, ChevronDown, Check, Users, LayoutGrid, Calendar, FileText, Bot, Box, Blocks, Settings2, AlertTriangle } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Flame, Users, AlertTriangle } from 'lucide-react';
 import ycLogo from '../assets/logos/yc-logo.png';
-import nixoLogo from '../assets/logos/nixo-logo.png';
-import slackLogo from '../assets/logos/slack-logo.webp';
-import githubLogo from '../assets/logos/github-logo.svg';
-import linearLogo from '../assets/logos/linear-logo.webp';
-import hubspotLogo from '../assets/logos/hubspot-logo.png';
-import notionLogo from '../assets/logos/Notion-logo.svg.png';
 
 const avatars = {
   sarah: 'https://api.dicebear.com/7.x/avataaars/svg?seed=SarahChen&backgroundColor=b6e3f4',
@@ -95,74 +89,8 @@ export default function Hero() {
             className="relative w-full mx-auto"
           >
             <div className="card-glass p-1.5 rounded-2xl">
-              {/* Window chrome */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-amber/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald/80" />
-                </div>
-                <div className="flex-1 text-center">
-                  <span className="text-xs font-mono text-text-muted">nixo — digest</span>
-                </div>
-                <div className="w-12" />
-              </div>
-
               {/* Dashboard */}
-              <div className="bg-void/90 rounded-b-xl flex text-left" style={{ minHeight: 460 }}>
-
-                {/* Left Sidebar */}
-                <div className="hidden lg:flex flex-col w-56 flex-shrink-0 bg-surface/40 py-5 px-4">
-                  {/* Brand */}
-                  <div className="flex items-center gap-2 px-2 mb-5">
-                    <img src={nixoLogo} alt="Nixo" className="w-5 h-5 object-contain" />
-                    <span className="text-sm font-semibold text-nixo">Nixo</span>
-                  </div>
-
-                  {/* Account Management */}
-                  <div className="mb-4">
-                    <div className="text-[9px] font-semibold text-text-faded uppercase tracking-wider px-2 mb-2">Account Management</div>
-                    <NavItem icon={<Users className="w-3.5 h-3.5" />} label="Accounts" />
-                    <NavItem icon={<Calendar className="w-3.5 h-3.5" />} label="Meetings" />
-                    <NavItem icon={<FileText className="w-3.5 h-3.5" />} label="Requests" />
-                  </div>
-
-                  {/* AI Studio */}
-                  <div className="mb-4">
-                    <div className="text-[9px] font-semibold text-text-faded uppercase tracking-wider px-2 mb-2">AI Studio</div>
-                    <NavItem icon={<Bot className="w-3.5 h-3.5" />} label="Intake Agent" />
-                    <NavItem icon={<LayoutGrid className="w-3.5 h-3.5" />} label="Schemas" />
-                    <NavItem icon={<Box className="w-3.5 h-3.5" />} label="Nodes" />
-                    <NavItem icon={<Blocks className="w-3.5 h-3.5" />} label="Software Catalog" />
-                  </div>
-
-                  {/* Settings */}
-                  <div>
-                    <div className="text-[9px] font-semibold text-text-faded uppercase tracking-wider px-2 mb-2">Settings</div>
-                    <NavItem icon={<Settings2 className="w-3.5 h-3.5" />} label="Integrations" hasArrow />
-                    {/* Connected integrations */}
-                    <div className="ml-3 mt-1 space-y-1">
-                      {[
-                        { logo: slackLogo, name: 'Slack', connected: true },
-                        { logo: hubspotLogo, name: 'HubSpot', connected: true },
-                        { logo: linearLogo, name: 'Linear', connected: true, invert: true },
-                        { logo: githubLogo, name: 'GitHub', invert: true },
-                        { logo: notionLogo, name: 'Notion' },
-                      ].map((app) => (
-                        <div key={app.name} className="flex items-center gap-2 px-2 py-1">
-                          <img src={app.logo} alt={app.name} className={`w-3.5 h-3.5 object-contain ${app.invert ? 'dark-invert' : ''}`} />
-                          <span className="text-[10px] text-text-muted flex-1">{app.name}</span>
-                          {app.connected && <Check className="w-2.5 h-2.5 text-emerald" />}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Divider */}
-                <div className="hidden lg:flex flex-shrink-0 items-stretch px-5">
-                  <div className="w-[1px] bg-border my-4" />
-                </div>
+              <div className="bg-void/90 rounded-xl flex text-left" style={{ minHeight: 420 }}>
 
                 {/* Main Content */}
                 <div className="flex-1 min-w-0 flex flex-col">
@@ -249,7 +177,7 @@ export default function Hero() {
                 </div>
 
                 {/* Divider */}
-                <div className="hidden xl:flex flex-shrink-0 items-stretch px-10">
+                <div className="hidden xl:flex flex-shrink-0 items-stretch px-10try to">
                   <div className="w-[1px] bg-border my-4" />
                 </div>
 
@@ -317,15 +245,6 @@ export default function Hero() {
 
 /* ── Sub-components ── */
 
-function NavItem({ icon, label, hasArrow }) {
-  return (
-    <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-text-secondary hover:text-text hover:bg-surface-hover transition-colors cursor-default">
-      {icon}
-      <span className="text-[11px] font-medium flex-1">{label}</span>
-      {hasArrow && <ChevronDown className="w-3 h-3 text-text-faded" />}
-    </div>
-  );
-}
 
 function FireItem({ company, title, person, avatar, time, tag, tagColor, note, noteAvatar, delay }) {
   const tagClasses = {
